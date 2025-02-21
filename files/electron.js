@@ -27,7 +27,7 @@ export default {
          devTools: !app.isPackaged,
          preload: path.join(__dirname, "preload.js"),
          contextIsolation: true,
-         nodeIntegration: true
+         nodeIntegration: false
        }
      });
    

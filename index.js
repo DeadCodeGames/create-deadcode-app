@@ -349,46 +349,46 @@ async function main({ name, lang, framework, css, type, router, norouter, ghpage
     const packageJSONPath = path.join(projectPath, "package.json");
 
     tryCreateFileWithData(packageJSONPath, JSON.stringify(packageJSON, null, 2));
-    tryCreateFileWithData(path.join(projectPath, "README.md"), files["README.md"](projectName));
-    if (!keepGitignore) tryCreateFileWithData(path.join(projectPath, ".gitignore"), files[".gitignore"]);
+    tryCreateFileWithData(path.join(projectPath, "README.md"), files.common["README.md"](projectName));
+    if (!keepGitignore) tryCreateFileWithData(path.join(projectPath, ".gitignore"), files.common[".gitignore"]);
     if (useGitHubPages) {
         tryCreateDirectory(path.join(projectPath, ".github", "workflows"));
-        tryCreateFileWithData(path.join(projectPath, ".github", "workflows", "buildndeploy.yml"), files["buildndeploy.yml"]);
+        tryCreateFileWithData(path.join(projectPath, ".github", "workflows", "buildndeploy.yml"), files.common["buildndeploy.yml"]);
     }
     tryCreateDirectory(path.join(projectPath, "public"), path.join(projectPath, "src"));
-    tryCreateFileWithData(path.join(projectPath, "public", "index.html"), files["index.html"](projectName));
-    tryCreateFileWithData(path.join(projectPath, "src", language.includes("TypeScript") ? "index.tsx" : "index.js"), files["indexReact"](language.includes("TypeScript"), cssFramework.includes("Tailwind")));
-    if (language.includes("TypeScript")) tryCreateFileWithData(path.join(projectPath, "tsconfig.json"), files["tsconfig.json"]);
-    if (useReactAppRewired) tryCreateFileWithData(path.join(projectPath, "config-overrides.js"), files["config-overrides.js"]);
+    tryCreateFileWithData(path.join(projectPath, "public", "index.html"), files.common["index.html"](projectName));
+    tryCreateFileWithData(path.join(projectPath, "src", language.includes("TypeScript") ? "index.tsx" : "index.js"), files.react["indexReact"](language.includes("TypeScript"), cssFramework.includes("Tailwind")));
+    if (language.includes("TypeScript")) tryCreateFileWithData(path.join(projectPath, "tsconfig.json"), files.config["tsconfig.json"]);
+    if (useReactAppRewired) tryCreateFileWithData(path.join(projectPath, "config-overrides.js"), files.config["config-overrides.js"]);
     if (cssFramework.includes("Tailwind")) {
-        tryCreateFileWithData(path.join(projectPath, "tailwind.config.js"), files["tailwind.config.js"](language.includes("TypeScript")));
-        tryCreateFileWithData(path.join(projectPath, "src", "input.css"), files["input.css"]);
+        tryCreateFileWithData(path.join(projectPath, "tailwind.config.js"), files.config["tailwind.config.js"](language.includes("TypeScript")));
+        tryCreateFileWithData(path.join(projectPath, "src", "input.css"), files.css["input.css"]);
     } else {
-        tryCreateFileWithData(path.join(projectPath, "src", "index.css"), files["index.css"]);
+        tryCreateFileWithData(path.join(projectPath, "src", "index.css"), files.css["index.css"]);
     }
     if (appType.includes("Electron")) {
-        tryCreateFileWithData(path.join(projectPath, "public", "main.js"), files["electron.main.js"]);
-        tryCreateFileWithData(path.join(projectPath, "public", "preload.js"), files["electron.preload.js"]);
+        tryCreateFileWithData(path.join(projectPath, "public", "main.js"), files.electron["electron.main.js"]);
+        tryCreateFileWithData(path.join(projectPath, "public", "preload.js"), files.electron["electron.preload.js"]);
         tryCreateDirectory(path.join(projectPath, "src", "components", "WinControls"));
         if (cssFramework.includes("Vanilla CSS")) {
-            tryCreateFileWithData(path.join(projectPath, "src", "components", "WinControls", "WinControls.css"), files["electron.WinControls.css"]);
-            tryCreateFileWithData(path.join(projectPath, "src", "components", "WinControls", "windows.WinControls.css"), files["electron.windows.WinControls.css"]);
-            tryCreateFileWithData(path.join(projectPath, "src", "components", "WinControls", "mac.WinControls.css"), files["electron.mac.WinControls.css"]);
-            tryCreateFileWithData(path.join(projectPath, "src", "components", "WinControls", "linux.WinControls.css"), files["electron.linux.WinControls.css"]);
-            tryCreateFileWithData(path.join(projectPath, "src", "components", "WinControls", `WinControls.${language.includes("TypeScript") ? "tsx" : "jsx"}`), files["electron.WinControls"](projectName, language.includes("TypeScript"), false));
+            tryCreateFileWithData(path.join(projectPath, "src", "components", "WinControls", "WinControls.css"), files.electron["electron.WinControls.css"]);
+            tryCreateFileWithData(path.join(projectPath, "src", "components", "WinControls", "windows.WinControls.css"), files.electron["electron.windows.WinControls.css"]);
+            tryCreateFileWithData(path.join(projectPath, "src", "components", "WinControls", "mac.WinControls.css"), files.electron["electron.mac.WinControls.css"]);
+            tryCreateFileWithData(path.join(projectPath, "src", "components", "WinControls", "linux.WinControls.css"), files.electron["electron.linux.WinControls.css"]);
+            tryCreateFileWithData(path.join(projectPath, "src", "components", "WinControls", `WinControls.${language.includes("TypeScript") ? "tsx" : "jsx"}`), files.electron["electron.WinControls"](projectName, language.includes("TypeScript"), false));
         } else {
-            tryCreateFileWithData(path.join(projectPath, "src", "components", "WinControls", `WinControls.${language.includes("TypeScript") ? "tsx" : "jsx"}`), files["electron.WinControls"](projectName, language.includes("TypeScript"), true));
+            tryCreateFileWithData(path.join(projectPath, "src", "components", "WinControls", `WinControls.${language.includes("TypeScript") ? "tsx" : "jsx"}`), files.electron["electron.WinControls"](projectName, language.includes("TypeScript"), true));
         }
         if (language.includes("TypeScript")) {
-            tryCreateFileWithData(path.join(projectPath, "src", "electron.d.ts"), files["electron.extraTypes"])
+            tryCreateFileWithData(path.join(projectPath, "src", "electron.d.ts"), files.electron["electron.extraTypes"])
         }
     }
-    tryCreateFileWithData(path.join(projectPath, "src", `App.${language.includes("TypeScript") ? "tsx" : "jsx"}`), files["AppReact"](useRouter, appType.includes("Electron"), language.includes("TypeScript")));
+    tryCreateFileWithData(path.join(projectPath, "src", `App.${language.includes("TypeScript") ? "tsx" : "jsx"}`), files.react["AppReact"](useRouter, appType.includes("Electron"), language.includes("TypeScript")));
     tryCreateDirectory(path.join(projectPath, "src", "components", "Hewwo"));
-    tryCreateFileWithData(path.join(projectPath, "src", "components", "Hewwo", `Hewwo.${language.includes("TypeScript") ? "tsx" : "jsx"}`), files["hewwo:3"](language.includes("TypeScript"), cssFramework.includes("Tailwind")));
+    tryCreateFileWithData(path.join(projectPath, "src", "components", "Hewwo", `Hewwo.${language.includes("TypeScript") ? "tsx" : "jsx"}`), files.react["hewwo:3"](language.includes("TypeScript"), cssFramework.includes("Tailwind")));
     console.log(process.argv[1], path.dirname(process.argv[1]));
     const runIsDir = await statSync(process.argv[1]);
-    tryUnzip(path.join(runIsDir.isDirectory() ? process.argv[1] : path.dirname(process.argv[1]), "fonts.zip"), path.join(projectPath, "src"));
+    tryUnzip(path.join(runIsDir.isDirectory() ? process.argv[1] : path.dirname(process.argv[1]), "files", "fonts.zip"), path.join(projectPath, "src"));
 }
 
 const argv = Object.fromEntries(

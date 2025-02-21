@@ -1,0 +1,36 @@
+{
+  "name": "@dead404games/create-deadcode-app",
+  "version": "1.0.0",
+  "description": "A simple boilerplate generator",
+  "main": "index.js",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DeadCodeGames/create-deadcode-app.git"
+  },
+  "keywords": [
+    "create-react-app",
+    "create-electron-app",
+    "boilerplate",
+    "react",
+    "electron",
+    "tailwind"
+  ],
+  "author": "Richard Kanshen @ DeadCodeGames <kanshen@mail.deadcode.is-a.dev> (https://deadcode.is-a.dev)",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/DeadCodeGames/create-deadcode-app/issues"
+  },
+  "homepage": "https://github.com/DeadCodeGames/create-deadcode-app#readme",
+  "dependencies": {
+    "@inquirer/prompts": "^7.2.0",
+    "chalk": "^5.3.0",
+    "unzipper": "^0.12.3",
+    "validate-npm-package-name": "github:DeadCodeGames/validate-npm-package-name",
+    "yargs": "^17.7.2"
+  }
+}

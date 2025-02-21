@@ -2,7 +2,6 @@
 
 import { input, confirm, select } from "@inquirer/prompts";
 import chalk from "chalk";
-import { execSync } from "child_process";
 import { existsSync, fstat, mkdirSync, writeFileSync } from "fs";
 import path from "path";
 import fs from "fs/promises";
